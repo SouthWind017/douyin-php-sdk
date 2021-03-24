@@ -64,9 +64,7 @@ class User extends BaseApi{
     {
         $resStr = $this->getUserUidUrl($real_share);
         $tiktokuid   = $this->cut("user/","?u_code",$resStr);
-
-        $resUrl      = "snssdk1128://user/profile/".$tiktokuid."?refer=web&gd_label=click_wap_download_follow&type=need_follow&needlaunchlog=1";
-        return $resUrl;
+        return "snssdk1128://user/profile/".$tiktokuid."?refer=web&gd_label=click_wap_download_follow&type=need_follow&needlaunchlog=1";
     }
     //获取跳转后网页用户的UID
     public function getUserUidUrl($url){
@@ -121,16 +119,15 @@ class User extends BaseApi{
      */
     public function decryptMobile($encryptedData)
     {
-        $data = $this->stripPkcs7Padding($this->client_secret,$encryptedData);
-        return $data;
+
+        return $this->stripPkcs7Padding($this->client_secret,$encryptedData);
     }
-    function stripPkcs7Padding($key,$str,$iv) {
+    function stripPkcs7Padding($key,$str) {
         $iv = substr($key,0,16);
         $str = base64_decode($str);
         $string = mcrypt_decrypt(MCRYPT_RIJNDAEL_128, $key, $str, MCRYPT_MODE_CBC, $iv);
         $slast = ord(substr($string, -1));
         $slastc = chr($slast);
-        $pcheck = substr($string, -$slast);
         if (preg_match("/$slastc{" . $slast . "}/", $string)) {
             $string = substr($string, 0, strlen($string) - $slast);
             return $string;
