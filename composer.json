@@ -1,0 +1,22 @@
+  
+{
+    "name": "douyin-php-sdk",
+    "description": "抖音开放平台SDK-PHP",
+    "authors": [
+        {
+            "name": "张天宇",
+            "email": "511114355@qq.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.6"
+    },
+    "autoload": {
+        "classmap": [
+            "Douyin.php"
+        ],
+        "psr-4": {
+            "Base\\": "Base/"
+        }
+    }
+}
